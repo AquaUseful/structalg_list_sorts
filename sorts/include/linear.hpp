@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace sorts {
-  template <typename FwIt, typename ItTr = std::iterator_traits<FwIt>> inline void linear(FwIt first, FwIt last) {
+  template <std::forward_iterator FwIt, typename ItTr = std::iterator_traits<FwIt>> inline void linear(FwIt first, FwIt last) {
     if (std::distance(first, last) <= 1) {
       return;
     }
@@ -26,16 +26,16 @@ namespace sorts {
   }
 }
 
-  /*template <typename BiIt> inline void shell(BiIt first, BiIt last) {
-     for (auto gap = std::distance(first, last) / 2; gap > 0; gap /= 2) {
-       for (auto i = std::next(first, gap); i != last; std::advance(i, gap)) {
-         for (auto j = i; j != first; std::advance(j, -gap)) {
-           if (*j < *std::prev(j, gap)) {
-             std::iter_swap(j, std::prev(j, gap));
-           } else {
-             break;
-           }
+/*template <typename BiIt> inline void shell(BiIt first, BiIt last) {
+   for (auto gap = std::distance(first, last) / 2; gap > 0; gap /= 2) {
+     for (auto i = std::next(first, gap); i != last; std::advance(i, gap)) {
+       for (auto j = i; j != first; std::advance(j, -gap)) {
+         if (*j < *std::prev(j, gap)) {
+           std::iter_swap(j, std::prev(j, gap));
+         } else {
+           break;
          }
        }
      }
-   }*/
+   }
+ }*/

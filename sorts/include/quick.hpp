@@ -3,7 +3,7 @@
 #include <algorithm>
 
 namespace sorts {
-  template <typename FwIt> inline void quick(FwIt first, FwIt last) {
+  template <std::forward_iterator FwIt, typename ItTr = std::iterator_traits<FwIt>> inline void quick(FwIt first, FwIt& last) {
     if (first == last) {
       return;
     }
@@ -16,7 +16,7 @@ namespace sorts {
     };
     auto mid1 = std::partition(first, last, pred_lt);
     auto mid2 = std::partition(mid1, last, pred_nlt);
-    quick(first, mid1);
-    quick(mid2, last);
+    quick<FwIt, ItTr>(first, mid1);
+    quick<FwIt, ItTr>(mid2, last);
   }
 }

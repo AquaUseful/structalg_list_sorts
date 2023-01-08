@@ -7,12 +7,13 @@
 #include <vector>
 namespace sorts {
 
-  template <typename T, typename List = std::forward_list<T>, typename FwIt> inline void shell(List& list, FwIt last) {
+  template <typename List, std::forward_iterator FwIt> inline void shell(List& list, FwIt last) {
+    if (std::distance(list.begin(), last) <= 1) {
+      return;
+    }
     for (auto gap = std::distance(list.begin(), last) / 2; gap > 0; gap /= 2) {
-
       auto i = std::next(list.begin(), gap);
       for (std::size_t n = 1; n < std::distance(list.begin(), last) / gap; ++n, std::advance(i, gap)) {
-
         auto j = list.begin();
         for (std::size_t m = 0; m < n; ++m, std::advance(j, gap)) {
           if (*i < *j) {

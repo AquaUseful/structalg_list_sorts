@@ -7,18 +7,12 @@ public:
   using clock_t = std::chrono::high_resolution_clock;
   using duration_t = std::chrono::microseconds;
 
-  template <typename ReturnT> struct Measure {
-    duration_t duration;
-    ReturnT func_result;
-  };
-
 public:
-  template <typename FuncT, typename... Args>
-  static constexpr auto measure(const FuncT func, Args... args) -> Measure<decltype(func(args...))> {
+  template <typename FuncT, typename... Args> static constexpr duration_t measure(const FuncT func, Args... args) {
     const auto start = m_clock.now();
-    const auto func_result = func(args...);
+    func(args...);
     const auto end = m_clock.now();
-    return Measure<decltype(func(args...))> {std::chrono::duration_cast<duration_t>(end - start), func_result};
+    return std::chrono::duration_cast<duration_t>(end - start);
   }
 
 private:
